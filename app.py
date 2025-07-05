@@ -2,91 +2,108 @@ import streamlit as st
 import pandas as pd
 import folium
 from folium.plugins import HeatMap
-from streamlit_folium import st_folium
+from streamlit_folium import folium_static
 import joblib
-from PIL import Image
+from datetime import datetime
 
-# Load logo
-logo_path = "D:\ISRO Hackthon 2025\Team Logo.png"
-logo = Image.open(logo_path)
+# Set Streamlit page config
+st.set_page_config(layout="wide", page_title="PM2.5 Prediction Dashboard", page_icon="🌍")
 
-# Load the trained model
-model = joblib.load("rf_model.pkl")
+# Logo and title section
+with st.container():
+    cols = st.columns([1, 8])
+    with cols[0]:
+        st.image("D:\ISRO Hackthon 2025\Team Logo.png", width=100)
+    with cols[1]:
+        st.title("🌍 AirCast:AI-Driven PM2.5 Forecasting")
+        st.markdown("""
+        This dashboard allows users to upload satellite + weather grid data and view predicted PM2.5 air pollution values on an interactive map.
+        """)
 
-# Set page config
-st.set_page_config(page_title="PM2.5 Predictor - TechnoBits", layout="wide", page_icon="🛰️")
+# Load pre-trained model
+@st.cache_resource
+def load_model():
+    return joblib.load("rf_model.pkl")
 
-# Simple professional style
-st.markdown("""
-    <style>
-    .main {
-        background-color: #f8f9fa;
-        color: #333333;
-    }
-    .title-style {
-        font-size: 40px;
-        color: #0056b3;
-        font-weight: 600;
-    }
-    .subtitle-style {
-        font-size: 18px;
-        color: #343a40;
-    }
-    .footer-style {
-        text-align: center;
-        font-size: 14px;
-        color: #6c757d;
-        margin-top: 50px;
-    }
-    </style>
-""", unsafe_allow_html=True)
+model = load_model()
 
-# Display logo and title
-col1, col2 = st.columns([1, 8])
-with col1:
-    st.image(logo, width=100)
-with col2:
-    st.markdown("<div class='title-style'>TechnoBits PM2.5 Predictor</div>", unsafe_allow_html=True)
-    st.markdown("<div class='subtitle-style'>Upload satellite and weather data to predict and visualize surface PM2.5 levels.</div>", unsafe_allow_html=True)
+# Sidebar: Upload
+st.sidebar.header("📤 Upload Section")
+uploaded_file = st.sidebar.file_uploader("Upload Grid CSV", type=["csv"])
 
-# File uploader
-uploaded_file = st.file_uploader("📤 Upload CSV File (lat, lon, AOD, Temp, RH, U wind, V wind, PBL)", type=["csv"])
-
-if uploaded_file is not None:
+# Main content
+if uploaded_file:
     df = pd.read_csv(uploaded_file)
-    st.success("File Uploaded Successfully!")
+
+    # Convert date column
+    if 'date' in df.columns:
+        df['date'] = pd.to_datetime(df['date'])
 
     # Rename columns if needed
-    rename_map = {'temp': 'Temp', 'u': 'U wind', 'v': 'V wind'}
-    df.rename(columns={k: v for k, v in rename_map.items() if k in df.columns}, inplace=True)
+    if 'temp' in df.columns:
+        df.rename(columns={"temp": "Temp", "u": "U wind", "v": "V wind"}, inplace=True)
 
+    # Check required columns
     required_cols = ['AOD', 'Temp', 'RH', 'U wind', 'V wind', 'PBL']
-
     if all(col in df.columns for col in required_cols):
+
+        # Date Filter
+        if 'date' in df.columns:
+            with st.expander("📅 Filter by Date", expanded=True):
+                unique_dates = sorted(df['date'].dt.date.unique())
+                selected_date = st.slider("Select Date", min_value=min(unique_dates), max_value=max(unique_dates), value=min(unique_dates))
+                df = df[df['date'].dt.date == selected_date]
+
+        # Predict
         X = df[required_cols]
         df['PM2.5'] = model.predict(X)
+        df['weight'] = (df['PM2.5'] - df['PM2.5'].min()) / (df['PM2.5'].max() - df['PM2.5'].min())
 
-        st.subheader("Sample of Predictions")
-        st.dataframe(df.head(), use_container_width=True)
+        st.success("✅ PM2.5 Predictions Completed")
 
-        # Interactive Heatmap
-        st.subheader("🗺️ PM2.5 Heatmap")
-        map_center = [df['lat'].mean(), df['lon'].mean()]
-        m = folium.Map(location=map_center, zoom_start=7)
+        # Section 1: Table
+        with st.expander("📋 Data Table", expanded=False):
+            st.dataframe(df[['lat', 'lon', 'PM2.5']])
 
-        heat_data = [[row['lat'], row['lon'], row['PM2.5']] for index, row in df.iterrows()]
-        HeatMap(heat_data, radius=10, blur=15).add_to(m)
+        # Section 2: Download Button
+        with st.expander("💾 Download Predicted Data", expanded=False):
+            csv = df.to_csv(index=False).encode('utf-8')
+            st.download_button("📥 Download CSV", csv, "pm25_predictions.csv", "text/csv")
 
-        st_data = st_folium(m, width=1000, height=600)
+        # Section 3: Map
+        st.subheader("🗺️ PM2.5 Prediction Heatmap")
+        m = folium.Map(location=[df['lat'].mean(), df['lon'].mean()], zoom_start=7)
+        heat_data = [[row['lat'], row['lon'], row['weight']] for _, row in df.iterrows()]
+        HeatMap(heat_data, radius=12, blur=18, max_zoom=10).add_to(m)
 
-        # Downloadable prediction CSV
-        csv = df.to_csv(index=False).encode('utf-8')
-        st.download_button("📥 Download Prediction CSV", csv, "predicted_pm25.csv", "text/csv")
+        # Threshold circles
+        for _, row in df.iterrows():
+            color = 'green' if row['PM2.5'] <= 60 else 'orange' if row['PM2.5'] <= 90 else 'red'
+            folium.CircleMarker(
+                location=[row['lat'], row['lon']],
+                radius=5,
+                color=color,
+                fill=True,
+                fill_opacity=0.6,
+                tooltip=f"PM2.5: {row['PM2.5']:.1f}"
+            ).add_to(m)
+
+        folium_static(m)
 
     else:
-        st.error("Uploaded file must contain: AOD, Temp, RH, U wind, V wind, PBL, lat, lon")
-else:
-    st.info("Upload a CSV file to get started.")
+        st.error(f"❌ Missing required columns: {', '.join(set(required_cols) - set(df.columns))}")
 
-# Footer
-st.markdown("<div class='footer-style'>Made with ❤️ by Team <b>TechnoBits</b></div>", unsafe_allow_html=True)
+else:
+    st.info("Upload a grid CSV with columns: lat, lon, AOD, Temp, RH, U wind, V wind, PBL")
+
+# About Section
+with st.expander("ℹ️ About this Project"):
+    st.markdown("""
+    **Project Title**: Monitoring Air Pollution from Space using Satellite Observations and AI/ML
+
+    **Goal**: Predict surface-level PM2.5 concentrations using satellite-based AOD, weather reanalysis data, and ground truth models.
+
+    **Technologies Used**: Python, Random Forest, Streamlit, Folium, Pandas, INSAT-3D, ERA5/MERRA2
+
+    **Team**: [TechnoBits]
+    """)
