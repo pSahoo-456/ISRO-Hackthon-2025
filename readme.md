@@ -49,7 +49,7 @@ Air pollution, especially PM2.5, is a critical environmental issue. Consistent a
 graph TD;
     AOD["Satellite AOD Data"]
     Weather["Meteorological Data (ERA5/MERRA2)"]
-    Grid["Lat/Lon Grid Generator"]
+    Grid["Lat/Lon Grid CPCB Data"]
     Dataset["Combined Dataset"]
     Model["Train Random Forest Model"]
     Predict["Predict PM2.5"]
