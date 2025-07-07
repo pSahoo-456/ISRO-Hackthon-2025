@@ -88,7 +88,8 @@ The main interface of our platform built using Streamlit, where users:
 
 ### 🔥 2. Heatmap View of PM2.5 Concentrations
 ![Heatmap View](assets/Heatmap.png)  
-The heatmap provides a visual density-based representation of PM2.5 concentrations over Odisha.  
+This heatmap shows the predicted PM2.5 concentration in the Delhi-NCR area. 
+The heat distribution helps identify pollution hotspots and gradients.  
 Areas with higher pollution are more intensely colored.  
 This map is generated using Folium + Leaflet + Streamlit integration.
 
