@@ -3,7 +3,16 @@
 > 🚀 A hackathon project developed for the **ISRO Hackathon 2025**, focused on estimating surface-level PM2.5 concentration using satellite-derived AOD, reanalysis meteorological data, and machine learning models.
 
 ---
+<p align="center">
+  <img src="assets/PS-3.png" alt="Problem Statement Screenshot" width="800"/>
+</p>
 
+> 🛰️ This project is based on the official Problem Statement from the **ISRO-BAH Hackathon 2025**.  
+> You can explore the full details of the problem statement on the official platform:
+
+🔗 **[Click here to view the problem overview](https://vision.hack2skill.com/event/bah2025?utm_source=hack2skill&utm_medium=homepage)**  
+
+---
 ## 🧠 Problem Statement
 
 Air pollution, especially PM2.5, is a critical environmental issue. Consistent and large-scale monitoring remains a challenge due to limited ground stations. This project aims to build a scalable AI/ML pipeline that:
