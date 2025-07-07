@@ -77,13 +77,12 @@ It includes:
 
 ---
 ## 🔍 Insightful Outputs of Our Air Monitoring System
-
-### 🗺️ 1. PM2.5 Dot Map View (Zoomed into Odisha)
-![Dot Map Zoom View](assets/Dot-map-view-zoom-in.png)  
-This image shows zoomed-in PM2.5 predictions using colored dot markers across the Odisha region.  
-- Red indicates high PM2.5 levels  
-- Green/Yellow indicates lower/moderate levels  
-- Gives clear spatial pollution distribution.
+### 💡 1. Prediction Interface – Streamlit View
+![Prediction UI](assets/PM-2.5-prediction.png)  
+The main interface of our platform built using Streamlit, where users:
+- Upload `.csv` data  
+- Get prediction status  
+- View model output with labels such as *Moderate*, *Poor*, etc.
 
 ---
 
@@ -95,19 +94,19 @@ This map is generated using Folium + Leaflet + Streamlit integration.
 
 ---
 
+
 ### 📍 3. Regional Dot-Grid View with Upload
 ![Dot Grid Upload](assets/Map-dot-view.png)  
 This is an interactive map interface where users upload a grid CSV and get PM2.5 values displayed as color-coded dots.  
 The platform supports uploading custom satellite grid data, which is then visualized dynamically.
 
 ---
-
-### 💡 4. Prediction Interface – Streamlit View
-![Prediction UI](assets/PM-2.5-prediction.png)  
-The main interface of our platform built using Streamlit, where users:
-- Upload `.csv` data  
-- Get prediction status  
-- View model output with labels such as *Moderate*, *Poor*, etc.
+### 🗺️ 4. PM2.5 Dot Map View (Zoomed into Odisha)
+![Dot Map Zoom View](assets/Dot-map-view-zoom-in.png)  
+This image shows zoomed-in PM2.5 predictions using colored dot markers across the Odisha region.  
+- Red indicates high PM2.5 levels  
+- Green/Yellow indicates lower/moderate levels  
+- Gives clear spatial pollution distribution.
 
 ---
 
@@ -126,3 +125,4 @@ Includes an interactive data table showing:
 - Predicted PM2.5 values  
 - AQI level (e.g., Moderate, Poor, Very Poor)
 
+---
