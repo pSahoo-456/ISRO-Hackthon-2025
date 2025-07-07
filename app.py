@@ -48,14 +48,14 @@ if uploaded_file:
     if 'date' in df.columns:
         df['date'] = pd.to_datetime(df['date'])
 
-    # Rename columns if needed
+   
     if 'temp' in df.columns:
         df.rename(columns={"temp": "Temp", "u": "U wind", "v": "V wind"}, inplace=True)
 
     required_cols = ['AOD', 'Temp', 'RH', 'U wind', 'V wind', 'PBL']
     if all(col in df.columns for col in required_cols):
 
-        # Date filter if applicable
+        # Date filter 
         if 'date' in df.columns:
             with st.expander("📅 Filter by Date", expanded=True):
                 unique_dates = sorted(df['date'].dt.date.unique())
