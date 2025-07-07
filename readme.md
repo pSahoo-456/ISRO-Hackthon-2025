@@ -66,4 +66,8 @@ graph TD;
 
 ```
 
+## 🏗️ Project Architecture
+
+![Project Architecture](assets/Architecture-Diagram4.drawio.png)
+> 📌 *This diagram illustrates the full pipeline from data input to prediction and visualization.*
 
