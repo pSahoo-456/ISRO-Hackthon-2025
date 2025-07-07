@@ -79,7 +79,7 @@ It includes:
 ## 🔍 Insightful Outputs of Our Air Monitoring System
 
 ### 🗺️ 1. PM2.5 Dot Map View (Zoomed into Odisha)
-![Dot Map Zoom View](./Dot-map-view-zoom-in.png)  
+![Dot Map Zoom View](assets/Dot-map-view-zoom-in.png)  
 This image shows zoomed-in PM2.5 predictions using colored dot markers across the Odisha region.  
 - Red indicates high PM2.5 levels  
 - Green/Yellow indicates lower/moderate levels  
@@ -88,7 +88,7 @@ This image shows zoomed-in PM2.5 predictions using colored dot markers across th
 ---
 
 ### 🔥 2. Heatmap View of PM2.5 Concentrations
-![Heatmap View](./Heatmap.png)  
+![Heatmap View](assets/Heatmap.png)  
 The heatmap provides a visual density-based representation of PM2.5 concentrations over Odisha.  
 Areas with higher pollution are more intensely colored.  
 This map is generated using Folium + Leaflet + Streamlit integration.
@@ -96,14 +96,14 @@ This map is generated using Folium + Leaflet + Streamlit integration.
 ---
 
 ### 📍 3. Regional Dot-Grid View with Upload
-![Dot Grid Upload](./Map-dot-view.png)  
+![Dot Grid Upload](assets/Map-dot-view.png)  
 This is an interactive map interface where users upload a grid CSV and get PM2.5 values displayed as color-coded dots.  
 The platform supports uploading custom satellite grid data, which is then visualized dynamically.
 
 ---
 
 ### 💡 4. Prediction Interface – Streamlit View
-![Prediction UI](./PM-2.5-prediction.png)  
+![Prediction UI](assets/PM-2.5-prediction.png)  
 The main interface of our platform built using Streamlit, where users:
 - Upload `.csv` data  
 - Get prediction status  
@@ -112,14 +112,14 @@ The main interface of our platform built using Streamlit, where users:
 ---
 
 ### 🌡️ 5. Grid-Based Heatmap Prediction Result
-![Prediction Heatmap](./Prediction-Area-Heatmap.png)  
+![Prediction Heatmap](assets/Prediction-Area-Heatmap.png)  
 This output visualizes PM2.5 prediction across a wider region, highlighting polluted zones based on predicted AQI values.  
 Each point shows predicted concentration and air quality level on hover.
 
 ---
 
 ### 📊 6. Summary Statistics Output
-![Summary Statistics](./summary-statistics.png)  
+![Summary Statistics](assets/summary-statistics.png)  
 Displays average, maximum PM2.5, and most common AQI level in the uploaded dataset.  
 Includes an interactive data table showing:
 - Latitude, longitude  
