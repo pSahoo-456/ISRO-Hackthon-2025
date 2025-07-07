@@ -76,6 +76,47 @@ It includes:
 - Output layer showing predicted PM2.5 and its visualizations.
 
 ---
+
+## 🚀 Getting Started
+
+Follow these steps to set up and run the project locally.
+
+### 📦 Prerequisites
+
+Make sure you have the following installed:
+
+- Python 3.8+
+- pip (Python package manager)
+- Git (to clone the repository)
+
+### 🛠️ Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/pm2.5-monitoring.git
+   cd pm2.5-monitoring
+
+2. **Create and activate a virtual environment**
+    ```bash
+    python -m venv venv
+    source venv/bin/activate         # On macOS/Linux
+    venv\Scripts\activate            # On Windows
+3.  **Install the required dependencies**
+    ```bash
+    pip install -r requirements.txt
+
+---
+##  🚀 How to use the system - Running the Streamlit App
+
+- Make sure your model and data files are placed in the correct directories.
+
+- Then launch the app:
+    ```bash
+    streamlit run app.py
+
+This will open the web interface in your browser (usually at http://localhost:8501).
+
+---
 ## 🔍 Insightful Outputs of Our Air Monitoring System
 ### 💡 1. Prediction Interface – Streamlit View
 ![Prediction UI](assets/PM-2.5-prediction.png)  
@@ -127,3 +168,37 @@ Includes an interactive data table showing:
 - AQI level (e.g., Moderate, Poor, Very Poor)
 
 ---
+
+##  📊 Model Evaluation & Performance
+
+---
+## 🧪 Results & Achievements
+
+---
+##  👨‍💻 Meet the Team / 🙌 Project Contributors
+
+- Prakash Sahoo(Team Lead): 
+- Susmita Das: 
+- Manohar Kumar Shah: 
+- Bikash Ranjan Ghadai: 
+
+---
+## ⚠️ Current Limitations
+
+---
+##  Future Scope & Improvements
+
+---
+##  🌐 Live Demo
+
+---
+## 🧩 Troubleshooting
+
+---
+##  📄 License
+
+---
+##  📬 Contact & Support
+- Prakash Sahoo
+- 📧 Email: prakash2004sahoo@gmail.com 
+- 📞 Phone: +91-9668187814
