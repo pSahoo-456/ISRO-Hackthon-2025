@@ -25,10 +25,10 @@ Air pollution, especially PM2.5, is a critical environmental issue. Consistent a
 
 ## 🎯 Objectives
 
-- 📌 Predict PM2.5 levels from AOD and meteorological inputs using **Random Forest regression**.
-- 📌 Visualize PM2.5 as interactive maps and static heatmaps.
-- 📌 Validate model predictions using CPCB ground-station data.
-- 📌 Enable reproducibility via scripts, trained models, and visualization outputs.
+-   Predict PM2.5 levels from AOD and meteorological inputs using **Random Forest regression**.
+-   Visualize PM2.5 as interactive maps and static heatmaps.
+-  Validate model predictions using CPCB ground-station data.
+-  Enable reproducibility via scripts, trained models, and visualization outputs.
 
 ---
 
@@ -48,7 +48,7 @@ Air pollution, especially PM2.5, is a critical environmental issue. Consistent a
 - **Python** (pandas, numpy, scikit-learn, matplotlib, seaborn, rasterio)
 - **Machine Learning:** Random Forest Regressor
 - **Visualization:** Folium, Matplotlib, GeoTIFF
-- **Deployment (optional):** Streamlit (for interactive demo)
+- **Deployment:** Streamlit (for interactive demo)
 
 ---
 
