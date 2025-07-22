@@ -102,7 +102,7 @@ Make sure you have the following installed:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/pm2.5-monitoring.git
+   git clone https://github.com/pSahoo-456/pm2.5-monitoring.git
    cd pm2.5-monitoring
 
 2. **Create and activate a virtual environment**
@@ -123,7 +123,7 @@ Make sure you have the following installed:
     ```bash
     streamlit run app.py
 
-This will open the web interface in your browser (usually at http://localhost:8501).
+This will open the web interface in your browser 
 
 ---
 ## 🔍 Insightful Outputs of Our Air Monitoring System
